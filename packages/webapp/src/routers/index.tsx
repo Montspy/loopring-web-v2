@@ -27,6 +27,7 @@ import {
 import { MarkdownPage, NotifyMarkdownPage } from "../pages/MarkdownPage";
 import { TradeRacePage } from "../pages/TradeRacePage";
 import { GuardianPage } from "../pages/WalletPage";
+import { DepositToPage } from "../pages/DepositPage";
 
 const ContentWrap = ({
   children,
@@ -98,6 +99,7 @@ const RouterView = ({ state }: { state: keyof typeof SagaStatus }) => {
           )}
           <WalletPage />
         </Route>
+
         <Route exact path="/loading">
           <LoadingPage />
         </Route>
@@ -123,6 +125,31 @@ const RouterView = ({ state }: { state: keyof typeof SagaStatus }) => {
               marginTop={3}
             >
               <GuardianPage />
+            </Box>
+          </Container>
+        </Route>
+        <Route exact path={["/depositTo", "/depositTo/*"]}>
+          {query && query.has("noheader") ? (
+            <></>
+          ) : (
+            <Header isHideOnScroll={false} />
+          )}
+          <Container
+            maxWidth="lg"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              flex: 1,
+            }}
+          >
+            <Box
+              display={"flex"}
+              flex={1}
+              alignItems={"stretch"}
+              flexDirection={"row"}
+              marginTop={3}
+            >
+              <DepositToPage />
             </Box>
           </Container>
         </Route>

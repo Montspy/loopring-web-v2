@@ -472,6 +472,7 @@ export const useNFTTransfer = <
     [lastRequest, processRequest, setShowAccount]
   );
   const nftTransferProps: TransferProps<any, any> = {
+    addrStatus,
     addressDefault: address,
     realAddr,
     handleSureItsLayer2: (sure: boolean) => {

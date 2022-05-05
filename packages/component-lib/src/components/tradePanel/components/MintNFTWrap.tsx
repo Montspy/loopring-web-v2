@@ -231,7 +231,8 @@ export const MintNFTWrap = <T extends TradeNFT<I>, I, C extends FeeInfo>({
           tradeData.nftIdView !== "" ? (
             <Typography
               color={"var(--color-error)"}
-              fontSize={14}
+              variant={"body2"}
+              marginTop={1 / 4}
               alignSelf={"stretch"}
               position={"relative"}
             >
@@ -245,8 +246,8 @@ export const MintNFTWrap = <T extends TradeNFT<I>, I, C extends FeeInfo>({
                   <Typography
                     color={"var(--color-text-primary)"}
                     variant={"body2"}
-                    whiteSpace={"break-spaces"}
                     marginTop={1 / 4}
+                    whiteSpace={"break-spaces"}
                     component={"span"}
                     style={{ wordBreak: "break-all" }}
                   >

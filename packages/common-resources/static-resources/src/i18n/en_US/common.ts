@@ -227,6 +227,7 @@ export default {
   labelDepositApproveProcess: "Waiting for Deposit approval",
   // labelTokenAccess:'Waiting to approve {{symbol}} access!',
   labelTokenAccess: "Waiting for approval",
+  labelWaitingRefer: "Waiting for refer approval",
   labelFailedTokenAccess: "Failed to approve {{symbol}} access!",
   labelSuccessTokenAccess: "Congratulations, you have {{symbol}} access!",
   labelSuccessUnlockDescribe: "Congratulations, Successfully Unlocked!",
@@ -320,7 +321,8 @@ export default {
   labelWaitForAuth: "Waiting for signature",
   labelSignDenied: "Signature request rejected!",
   labelFirstSignDenied: "Your wallet doesn't support this signature method",
-  labelDepositWaitForAuth: "Please confirm to deposit {{value}} {{symbol}}.",
+  labelDepositWaitForAuth:
+    "Please confirm to deposit {{value}} {{symbol}} to {{to}} L2.",
   labelDepositDenied: "You refuse to deposit {{value}} {{symbol}}.",
   labelDepositFailed: "Deposit {{value}} {{symbol}} failed!",
   labelDepositSubmit: "Deposit {{value}} {{symbol}} submitted.",
@@ -628,4 +630,7 @@ export default {
   labelmarket: "Market",
   labelswap: "Swap",
   labelamm: "Amm",
+  describeTitleConnectToWalletAsDeposit: "Connect wallet to deposit",
+  depositLabelTo: "To address, account id or ENS.",
+  labelAddressNotLoopring: "That account not active layer2",
 };

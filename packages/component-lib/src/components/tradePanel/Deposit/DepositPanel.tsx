@@ -1,13 +1,25 @@
 import { DepositProps } from "../Interface";
 import { withTranslation, WithTranslation } from "react-i18next";
-import { CoinInfo, CoinMap, IBData } from "@loopring-web/common-resources";
+import {
+  CoinInfo,
+  CoinMap,
+  IBData,
+  // myLog,
+} from "@loopring-web/common-resources";
 import { SwitchPanel, SwitchPanelProps } from "../../basic-lib";
 import { DepositWrap, TradeMenuList, useBasicTrade } from "../components";
 import React from "react";
 import { cloneDeep } from "lodash";
 
 export const DepositPanel = withTranslation("common", { withRef: true })(
-  <T extends IBData<I>, I>({
+  <
+    T extends {
+      referAddress?: string;
+      toAddress?: string;
+      addressError?: { error: boolean; message: string };
+    } & IBData<I>,
+    I
+  >({
     type = "TOKEN",
     onDepositClick,
     depositBtnStatus,
@@ -18,12 +30,13 @@ export const DepositPanel = withTranslation("common", { withRef: true })(
     ...rest
   }: DepositProps<T, I> & WithTranslation) => {
     // const { theme } = useSettings();
-    const {
-      // toolBarItemBack,
-      onChangeEvent,
-      index,
-      switchData,
-    } = useBasicTrade({ ...rest, type, walletMap, coinMap });
+    const { onChangeEvent, index, switchData } = useBasicTrade({
+      ...rest,
+      type,
+      walletMap,
+      coinMap,
+    });
+    // myLog("DepositProps", rest);
     const getFilteredWalletMap = React.useCallback(() => {
       if (walletMap) {
         const clonedWalletMap = cloneDeep(walletMap);
@@ -60,15 +73,14 @@ export const DepositPanel = withTranslation("common", { withRef: true })(
           key: "trade",
           element: React.useMemo(
             () => (
+              // @ts-ignore
               <DepositWrap<T, I>
-                key={"transfer"}
+                key={"trade"}
                 {...{
                   ...rest,
                   type,
                   tradeData: switchData.tradeData,
                   onChangeEvent,
-                  // _width: `calc(var(--modal-width) - ${(theme.unit * 5) / 2}px)`,
-
                   disabled: !!rest.disabled,
                   onDepositClick,
                   depositBtnStatus,
@@ -97,6 +109,7 @@ export const DepositPanel = withTranslation("common", { withRef: true })(
           key: "tradeMenuList",
           element: React.useMemo(
             () => (
+              // @ts-ignore
               <TradeMenuList
                 {...{
                   nonZero: false,
