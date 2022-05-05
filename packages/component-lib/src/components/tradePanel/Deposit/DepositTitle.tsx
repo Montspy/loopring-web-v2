@@ -7,7 +7,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { PopoverPure } from "../../basic-lib";
 import { DepositPanelType } from "./Interface";
 
-const DepositTitle = ({ title, description }: any) => {
+export const DepositTitle = ({ title, description }: any) => {
   const { t } = useTranslation();
   const popupState = usePopupState({
     variant: "popover",

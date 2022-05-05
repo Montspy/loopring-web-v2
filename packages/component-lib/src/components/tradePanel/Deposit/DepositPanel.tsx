@@ -7,7 +7,14 @@ import React from "react";
 import { cloneDeep } from "lodash";
 
 export const DepositPanel = withTranslation("common", { withRef: true })(
-  <T extends IBData<I>, I>({
+  <
+    T extends {
+      referAddress?: string;
+      toAddress?: string;
+      addressError?: { error: boolean; message: string };
+    } & IBData<I>,
+    I
+  >({
     type = "TOKEN",
     onDepositClick,
     depositBtnStatus,
@@ -24,6 +31,7 @@ export const DepositPanel = withTranslation("common", { withRef: true })(
       index,
       switchData,
     } = useBasicTrade({ ...rest, type, walletMap, coinMap });
+    // myLog("switchData", switchData);
     const getFilteredWalletMap = React.useCallback(() => {
       if (walletMap) {
         const clonedWalletMap = cloneDeep(walletMap);
@@ -60,15 +68,14 @@ export const DepositPanel = withTranslation("common", { withRef: true })(
           key: "trade",
           element: React.useMemo(
             () => (
+              // @ts-ignore
               <DepositWrap<T, I>
-                key={"transfer"}
+                key={"trade"}
                 {...{
                   ...rest,
                   type,
                   tradeData: switchData.tradeData,
                   onChangeEvent,
-                  // _width: `calc(var(--modal-width) - ${(theme.unit * 5) / 2}px)`,
-
                   disabled: !!rest.disabled,
                   onDepositClick,
                   depositBtnStatus,
@@ -97,6 +104,7 @@ export const DepositPanel = withTranslation("common", { withRef: true })(
           key: "tradeMenuList",
           element: React.useMemo(
             () => (
+              // @ts-ignore
               <TradeMenuList
                 {...{
                   nonZero: false,

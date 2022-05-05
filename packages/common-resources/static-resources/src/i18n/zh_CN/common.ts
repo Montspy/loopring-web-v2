@@ -223,6 +223,7 @@ export default {
   labelDepositApproveProcess: "等待用户确认充值",
   // labelTokenAccess: '等待钱包确认{{symbol}}授权！',
   labelTokenAccess: "等待钱包确认授权！",
+  labelWaitingRefer: "Waiting for Refer approval",
   labelFailedTokenAccess: "{{symbol}}授权失败！",
   labelSuccessTokenAccess: "恭喜, 你可以交易 {{symbol}} 了！",
   labelSuccessUnlockDescribe: "恭喜，解锁成功！",
@@ -596,4 +597,6 @@ export default {
   labelmarket: "Market",
   labelswap: "Swap",
   labelamm: "Amm",
+  describeTitleConnectToWalletAsDeposit: "Connect wallet to deposit",
+  depositLabelTo: "To address, account id or ENS.",
 };

@@ -65,7 +65,7 @@ export type TransferExtendProps<T, I, C> = {
   isLoopringAddress?: boolean;
   isAddressCheckLoading?: boolean;
   isSameAddress?: boolean;
-  addrStatus?: AddressError;
+  addrStatus: AddressError;
   onTransferClick: (data: T, isFirstTime?: boolean) => void;
   handleFeeChange: (value: C) => void;
   handleOnAddressChange: (value: string | undefined | I) => void;
@@ -109,28 +109,32 @@ export type ExportAccountExtendProps = {
 /**
  * private props
  */
-export type DepositInfoProps<I> = {
+export type DepositInfoProps = {
   depositBtnStatus?: keyof typeof TradeBtnStatus | undefined;
   title?: string;
   description?: string;
   chargeFeeTokenList?: FeeInfo[];
   isNewAccount: boolean;
   addressDefault?: string;
-  handleOnAddressChange?: (value: string | undefined | I) => void;
-  handleAddressError?: (
-    address: string
-  ) => { error: boolean; message?: string | JSX.Element } | undefined;
+  // handleOnAddressChange?: (value: string | undefined | I) => void;
+  // handleAddressError?: (
+  //   address: string
+  // ) => { error: boolean; message?: string | JSX.Element } | undefined;
   wait?: number;
 } & BtnInfoProps;
 
-export type DepositExtendProps<T, I> = {
+export type DepositExtendProps<T> = {
   isThumb?: boolean;
   allowTrade?: any;
+  isAllowInputTokenAddress?: boolean;
   onDepositClick: (data: T) => void;
-} & DepositInfoProps<I>;
+  toIsAddressCheckLoading: boolean;
+  referIsAddressCheckLoading: boolean;
+  handleClear: () => void;
+} & DepositInfoProps;
 
 export type DepositViewProps<T, I> = BasicACoinTradeViewProps<T, I> &
-  DepositExtendProps<T, I>;
+  DepositExtendProps<T>;
 
 export type WithdrawInfoProps<C> = {
   withdrawI18nKey?: string;
@@ -157,7 +161,7 @@ export type WithdrawExtendProps<T, I, C> = {
   isAddressCheckLoading: boolean;
   isCFAddress: boolean;
   isContractAddress: boolean;
-  addrStatus?: AddressError;
+  addrStatus: AddressError;
   disableWithdrawList?: string[];
   onWithdrawClick: (data: T, isFirstTime?: boolean) => void;
   handleFeeChange: (value: C) => void;

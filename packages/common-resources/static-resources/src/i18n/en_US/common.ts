@@ -227,6 +227,7 @@ export default {
   labelDepositApproveProcess: "Waiting for Deposit approval",
   // labelTokenAccess:'Waiting to approve {{symbol}} access!',
   labelTokenAccess: "Waiting for approval",
+  labelWaitingRefer: "Waiting for refer approval",
   labelFailedTokenAccess: "Failed to approve {{symbol}} access!",
   labelSuccessTokenAccess: "Congratulations, you have {{symbol}} access!",
   labelSuccessUnlockDescribe: "Congratulations, Successfully Unlocked!",
@@ -628,4 +629,6 @@ export default {
   labelmarket: "Market",
   labelswap: "Swap",
   labelamm: "Amm",
+  describeTitleConnectToWalletAsDeposit: "Connect wallet to deposit",
+  depositLabelTo: "To address, account id or ENS.",
 };

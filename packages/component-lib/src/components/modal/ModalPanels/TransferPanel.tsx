@@ -1,6 +1,5 @@
 import { WithTranslation, withTranslation } from "react-i18next";
 import { SwitchPanel, SwitchPanelProps } from "../../basic-lib";
-import { IBData } from "@loopring-web/common-resources";
 import React from "react";
 import { TransferProps } from "../../tradePanel";
 import {
@@ -8,6 +7,7 @@ import {
   TransferWrap,
   useBasicTrade,
 } from "../../tradePanel/components";
+import { IBData } from "@loopring-web/common-resources";
 
 export const TransferPanel = withTranslation("common", { withRef: true })(
   <T extends IBData<I>, I>({
@@ -41,8 +41,9 @@ export const TransferPanel = withTranslation("common", { withRef: true })(
           key: "trade",
           element: React.useMemo(
             () => (
-              <TransferWrap<T, I, any>
-                key={"transfer"}
+              // @ts-ignore
+              <TransferWrap
+                key={"trade"}
                 {...{
                   ...rest,
                   type,
@@ -89,7 +90,7 @@ export const TransferPanel = withTranslation("common", { withRef: true })(
                         ...rest,
                         onChangeEvent,
                         //rest.walletMap,
-                        selected: switchData.tradeData.belong,
+                        selected: switchData.tradeData?.belong,
                         tradeData: switchData.tradeData,
                         //oinMap
                       }}

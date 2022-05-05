@@ -197,7 +197,6 @@ export const TransferWrap = <
     },
     []
   );
-
   const isInvalidAddressOrENS =
     !isAddressCheckLoading &&
     address &&

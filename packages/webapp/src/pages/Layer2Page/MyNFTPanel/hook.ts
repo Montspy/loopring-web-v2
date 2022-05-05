@@ -83,7 +83,6 @@ export const useMyNFT = () => {
     ) {
       const _id = new BigNumber(nftId ?? "", 16);
       myLog("nftId", _id, _id.toString());
-      //TODO move to server cache
       return LoopringAPI?.nftAPI
         ?.getContractNFTMeta({
           _id: _id.toString(),
