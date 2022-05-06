@@ -76,7 +76,6 @@ import {
   NFTDeploy_In_Progress,
   NFTMint_First_Method_Denied,
   NFTMint_In_Progress,
-  account,
   Deposit_Sign_WaitForRefer,
 } from "@loopring-web/component-lib";
 import {
@@ -206,8 +205,10 @@ export function useAccountModalForUI({
 
   const goDeposit = React.useCallback(() => {
     setShowAccount({ isShow: false });
-    setShowDeposit({ isShow: true });
-  }, [setShowAccount, setShowDeposit]);
+    if (!/depositto/gi.test(pathname)) {
+      setShowDeposit({ isShow: true });
+    }
+  }, [setShowAccount, setShowDeposit, pathname]);
 
   const onQRClick = React.useCallback(() => {
     setShowAccount({ isShow: true, step: AccountStep.QRCode });
@@ -262,13 +263,9 @@ export function useAccountModalForUI({
   const backToDepositBtnInfo = React.useMemo(() => {
     return {
       btnTxt: "labelRetry",
-      callback: () => {
-        setShowAccount({ isShow: false });
-        setShowDeposit({ isShow: true });
-        // setShowAccount({isShow: true, step: AccountStep.Deposit});
-      },
+      callback: goDeposit,
     };
-  }, [setShowAccount, setShowDeposit]);
+  }, [goDeposit]);
 
   const backToNFTDepositBtnInfo = React.useMemo(() => {
     return {
@@ -467,7 +464,7 @@ export function useAccountModalForUI({
         updateWalletLayer2();
       }
     }
-  }, [account, chainId, updateDepositHash]);
+  }, [account, chainId, updateDepositHash, updateWalletLayer2]);
   React.useEffect(() => {
     if (
       chainInfos?.depositHashes &&
@@ -478,7 +475,7 @@ export function useAccountModalForUI({
     return () => {
       clearTimeout(nodeTimer as unknown as NodeJS.Timeout);
     };
-  }, [chainInfos?.depositHashes]);
+  }, [account.accAddress, chainInfos?.depositHashes, updateDepositStatus]);
 
   const isSupportCallback = React.useCallback(async () => {
     const is_Contract = await isContract(
@@ -486,14 +483,14 @@ export function useAccountModalForUI({
       account.accAddress
     );
     setIsSupport(!is_Contract);
-    myLog("isSupportCallback", account.accAddress, !is_Contract);
-  }, [account, connectProvides.usedWeb3]);
+    // myLog("isSupportCallback", account.accAddress, !is_Contract);
+  }, [account]);
 
   React.useEffect(() => {
     if (connectProvides && connectProvides.usedWeb3 && account.accAddress) {
       isSupportCallback();
     }
-  }, [account.accAddress, , connectProvides.usedWeb3]);
+  }, [account.accAddress, isSupportCallback]);
   const accountList = React.useMemo(() => {
     return Object.values({
       [AccountStep.NoAccount]: {
@@ -590,11 +587,7 @@ export function useAccountModalForUI({
             }}
           />
         ),
-        onBack: () => {
-          setShowAccount({ isShow: false });
-          setShowDeposit({ isShow: true });
-          // setShowAccount({isShow: true, step: AccountStep.Deposit});
-        },
+        onBack: goDeposit,
       },
       [AccountStep.Deposit_Approve_Submit]: {
         view: (
@@ -843,7 +836,7 @@ export function useAccountModalForUI({
         view: (
           <NFTMint_First_Method_Denied
             btnInfo={{
-              btnTxt: "labelRetry",
+              btnTxt: "labelTryAnother",
               callback: () => {
                 nftMintProps.onNFTMintClick(nftMintValue as any, false);
               },
@@ -1448,7 +1441,7 @@ export function useAccountModalForUI({
           <UpdateAccount_First_Method_Denied
             btnInfo={{
               btnTxt: t("labelTryAnother"),
-              callback: (e?: any) => {
+              callback: (_e?: any) => {
                 goUpdateAccount({ isFirstTime: false });
               },
             }}
@@ -1599,7 +1592,7 @@ export function useAccountModalForUI({
             patch={{ isReset: true }}
             btnInfo={{
               btnTxt: t("labelTryAnother"),
-              callback: (e?: any) => {
+              callback: (_e?: any) => {
                 goUpdateAccount({ isReset: true, isFirstTime: false });
               },
             }}
@@ -1720,26 +1713,41 @@ export function useAccountModalForUI({
     onDisconnect,
     addressShort,
     onQRClick,
+    lockBtn,
+    unlockBtn,
     rest,
     t,
     onBack,
-    lockBtn,
-    unlockBtn,
     backToDepositBtnInfo,
-    backToNFTDepositBtnInfo,
-    backToMintBtnInfo,
     closeBtnInfo,
     depositProps.tradeData.belong,
     depositProps.tradeData.tradeValue,
-    // TryNewTransferAuthBtnInfo,
+    isShowAccount.info,
+    isShowAccount.error,
+    nftDepositValue,
+    backToNFTDepositBtnInfo,
+    nftMintValue,
+    backToMintBtnInfo,
+    nftDeployValue,
+    backToDeployBtnInfo,
     backToTransferBtnInfo,
-    // TryNewWithdrawAuthBtnInfo,
     backToWithdrawBtnInfo,
     backToUpdateAccountBtnInfo,
     backToUnlockAccountBtnInfo,
     backToResetAccountBtnInfo,
     setShowAccount,
     setShowDeposit,
+    setShowNFTMint,
+    nftDeployProps,
+    transferProps,
+    transferValue,
+    withdrawProps,
+    withdrawValue,
+    nftTransferProps,
+    nftTransferValue,
+    nftWithdrawProps,
+    nftWithdrawValue,
+    setShowActiveAccount,
     goUpdateAccount,
   ]);
 
