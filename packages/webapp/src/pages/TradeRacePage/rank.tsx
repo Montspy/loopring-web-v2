@@ -170,14 +170,7 @@ export const RankRaw = <R extends object>({
   }, [selected]);
   const getTableValues = React.useCallback(async () => {
     const owner = searchParams.get("owner");
-    const _selected = filters?.find((item) => selected === item);
-    const url = `${baseURL}/${Activity_URL}?${
-      _selected ? `&selected=${_selected}` : ""
-    }${
-      owner && owner !== "undefined" && owner !== "null"
-        ? `&owner=${owner}`
-        : ""
-    }&version=${version}`;
+    const url = `${baseURL}/${Activity_URL}?selected=${selected}&owner=${owner}&version=${version}`;
     fetch(url)
       .then((response) => response.json())
       .then((json) => {
@@ -208,7 +201,7 @@ export const RankRaw = <R extends object>({
           justifyContent={"space-between"}
           width={"100%"}
         >
-          {!!filters?.length && (
+          {filters && (
             <StyledTextFiled
               id={"trading-race-filter"}
               select

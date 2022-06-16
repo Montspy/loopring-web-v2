@@ -5,11 +5,8 @@ import { SendAssetProps } from "./Interface";
 import { useTranslation } from "react-i18next";
 import {
   BackIcon,
-  ExchangeAIcon,
+  CardIcon,
   IncomingIcon,
-  L1l2Icon,
-  L2l2Icon,
-  OutputIcon,
 } from "@loopring-web/common-resources";
 import { useSettings } from "../../../stores";
 
@@ -18,15 +15,9 @@ const BoxStyled = styled(Box)`` as typeof Box;
 const IconItem = ({ svgIcon }: { svgIcon: string }) => {
   switch (svgIcon) {
     case "IncomingIcon":
-      return <IncomingIcon color={"inherit"} sx={{ marginRight: 1 }} />;
-    case "L2l2Icon":
-      return <L2l2Icon color={"inherit"} sx={{ marginRight: 1 }} />;
-    case "L1l2Icon":
-      return <L1l2Icon color={"inherit"} sx={{ marginRight: 1 }} />;
-    case "ExchangeAIcon":
-      return <ExchangeAIcon color={"inherit"} sx={{ marginRight: 1 }} />;
-    case "OutputIcon":
-      return <OutputIcon color={"inherit"} sx={{ marginRight: 1 }} />;
+      return <IncomingIcon color={"inherit"} />;
+    case "CardIcon":
+      return <CardIcon color={"inherit"} />;
   }
 };
 export const SendAsset = ({
@@ -37,6 +28,14 @@ export const SendAsset = ({
 }: SendAssetProps) => {
   const { t } = useTranslation("common");
   const { isMobile } = useSettings();
+  // const [isToL1, setIsToL1] = React.useState<boolean>(true);
+  // React.useEffect(() => {
+  //   // debugger;
+  //   if (symbol && /^LP-/gi.test(symbol)) {
+  //     setIsToL1(true);
+  //   }
+  //   setIsToL1(false);
+  // }, [symbol]);
 
   return (
     <BoxStyled
@@ -101,11 +100,6 @@ export const SendAsset = ({
                   color={"inherit"}
                   display={"inline-flex"}
                   alignItems={"center"}
-                  lineHeight={"1.2em"}
-                  sx={{
-                    textIndent: 0,
-                    textAlign: "left",
-                  }}
                 >
                   <>{IconItem({ svgIcon: item.svgIcon })}</>
                   {t("label" + item.key)}

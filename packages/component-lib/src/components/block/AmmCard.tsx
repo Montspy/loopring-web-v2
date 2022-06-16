@@ -13,6 +13,7 @@ import moment from "moment";
 import { WithTranslation, withTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import {
+  ACTIVITY_TYPE,
   AmmCardProps,
   AvatarCoinStyled,
   EmptyValueTag,
@@ -218,11 +219,10 @@ export const AmmCard = withTranslation("common", { withRef: true })(
           const date = new Date(duration.from);
           const year = date.getFullYear();
           const month = ("0" + (date.getMonth() + 1).toString()).slice(-2);
-          const current_event_date = `${year}-${month}`;
+          const day = ("0" + date.getDate().toString()).slice(-2);
+          const current_event_date = `${year}-${month}-${day}`;
           history.push(
-            `/race-event/${current_event_date}?selected=${pathname}&type=${""}&owner=${
-              account?.accAddress
-            }`
+            `/race-event/${current_event_date}?pair=${pathname}&type=${ACTIVITY_TYPE[ruleType]}&owner=${account?.accAddress}`
           );
         }, [history, pathname]);
 

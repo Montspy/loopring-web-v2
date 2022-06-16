@@ -15,10 +15,10 @@ const amountMapSlice: Slice<AmountStates> = createSlice({
   name: "amountMap",
   initialState,
   reducers: {
-    getAmount(state, _action: PayloadAction<{ market: string }>) {
+    getAmount(state, action: PayloadAction<{ market: string }>) {
       state.status = SagaStatus.PENDING;
     },
-    resetAmount(state, _action: PayloadAction<undefined>) {
+    resetAmount(state, action: PayloadAction<undefined>) {
       state.status = SagaStatus.PENDING;
     },
     getAmountStatus(state, action: PayloadAction<AmountStates>) {

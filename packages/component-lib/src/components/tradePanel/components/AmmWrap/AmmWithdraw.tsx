@@ -3,7 +3,6 @@ import {
   AmmInData,
   AvatarCoinStyled,
   CoinInfo,
-  defalutSlipage,
   EmptyValueTag,
   ExchangeIcon,
   getValuePrecisionThousand,
@@ -510,7 +509,7 @@ export const AmmWithdrawWrap = <
                             slippage:
                               ammData && ammData.slippage
                                 ? ammData.slippage
-                                : defalutSlipage,
+                                : 0.5,
                           }}
                         />
                       </PopoverPure>
@@ -534,7 +533,8 @@ export const AmmWithdrawWrap = <
                 variant="body2"
                 color={"textSecondary"}
               >
-                {t("swapFee")}
+                {" "}
+                {t("swapFee")}{" "}
               </Typography>
               <Typography component={"p"} variant="body2" color={"textPrimary"}>
                 {ammCalcData ? ammCalcData?.fee : EmptyValueTag}

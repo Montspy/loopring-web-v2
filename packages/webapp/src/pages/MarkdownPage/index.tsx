@@ -134,4 +134,3 @@ export const MarkdownPage = () => {
 };
 
 export * from "./notifyMarkdown";
-export * from "./investMarkdown";

@@ -6,7 +6,7 @@ import {
   RawDataTradeItem,
 } from "@loopring-web/component-lib";
 import { volumeToCount } from "./volumeToCount";
-import { myError, myLog } from "@loopring-web/common-resources";
+import { myError } from "@loopring-web/common-resources";
 
 export const getUserTrades = (market: string) => {
   if (!LoopringAPI.userAPI) {
@@ -164,7 +164,7 @@ export const makeMyAmmMarketArray = <C extends { [key: string]: any }>(
         return tradeArray;
       } catch (error: any) {
         //CATCHERROR:
-        myLog("marketTransaction::", error);
+        console.log(error);
         // new CustomError()
       }
     });

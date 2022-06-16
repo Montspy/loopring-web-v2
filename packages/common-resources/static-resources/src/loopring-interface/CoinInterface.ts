@@ -72,8 +72,6 @@ export type TradeCalcData<T> = {
   priceImpactColor: string;
   minimumReceived: string;
   fee: string;
-  feeTakerRate?: number;
-  tradeCost?: string;
 };
 export type TradeCalcProData<T> = {
   coinBase: keyof T; //name
@@ -90,8 +88,6 @@ export type TradeCalcProData<T> = {
   priceImpactColor: string;
   minimumReceived: string;
   fee: string;
-  feeTakerRate?: number;
-  tradeCost?: string;
 };
 
 /**

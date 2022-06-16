@@ -2,19 +2,17 @@ import { SwapTradeData, TradeBtnStatus } from "../../Interface";
 import {
   CoinInfo,
   CoinMap,
-  defalutSlipage,
   EmptyValueTag,
   ExchangeIcon,
   getValuePrecisionThousand,
   IBData,
-  Info2Icon,
   ReverseIcon,
   SlippageTolerance,
   TradeCalcData,
 } from "@loopring-web/common-resources";
 import { WithTranslation } from "react-i18next";
 import React from "react";
-import { Grid, Tooltip, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { InputButton, LinkActionStyle, PopoverPure } from "../../../basic-lib";
 import { usePopupState } from "material-ui-popup-state/hooks";
 import { bindHover, bindPopover } from "material-ui-popup-state/es";
@@ -217,29 +215,19 @@ export const SwapTradeWrap = <
   const priceImpactColor = tradeCalcData?.priceImpactColor
     ? tradeCalcData.priceImpactColor
     : "textPrimary";
-  const priceImpact =
-    tradeCalcData?.priceImpact !== undefined
-      ? getValuePrecisionThousand(
-          tradeCalcData.priceImpact,
-          undefined,
-          undefined,
-          2,
-          true
-        ) + " %"
-      : EmptyValueTag;
+  const priceImpact = tradeCalcData?.priceImpact
+    ? getValuePrecisionThousand(
+        tradeCalcData.priceImpact,
+        undefined,
+        undefined,
+        2,
+        true
+      ) + " %"
+    : EmptyValueTag;
 
   const fee =
     tradeCalcData && tradeCalcData.fee
-      ? `${tradeCalcData.fee} ${tradeData.buy?.belong}` //(parseFloat(tradeCalcData.fee) / 100).toString() + "%"
-      : EmptyValueTag;
-
-  const userTakerRate =
-    tradeCalcData && tradeCalcData.feeTakerRate
-      ? (tradeCalcData.feeTakerRate / 100).toString()
-      : EmptyValueTag;
-  const tradeCostMin =
-    tradeCalcData && tradeCalcData.tradeCost
-      ? `${tradeCalcData.tradeCost} ${tradeData.buy?.belong}` //(parseFloat(tradeCalcData.fee) / 100).toString() + "%"
+      ? (parseFloat(tradeCalcData.fee) / 100).toString() + "%"
       : EmptyValueTag;
 
   const minimumReceived =
@@ -346,61 +334,15 @@ export const SwapTradeWrap = <
               justifyContent={"space-between"}
               direction={"row"}
               alignItems={"center"}
-              marginTop={1 / 2}
-            >
-              <Tooltip
-                title={t("labelSwapFeeTooltips", {
-                  rate: userTakerRate,
-                  value: tradeCostMin,
-                }).toString()}
-                placement={"top"}
-              >
-                <Typography
-                  component={"p"}
-                  variant="body2"
-                  color={"textSecondary"}
-                  display={"inline-flex"}
-                  alignItems={"center"}
-                >
-                  <Info2Icon
-                    fontSize={"small"}
-                    color={"inherit"}
-                    sx={{ marginX: 1 / 2 }}
-                  />
-                  {" " + t("swapFee")}
-                </Typography>
-              </Tooltip>
-              <Typography component={"p"} variant="body2" color={"textPrimary"}>
-                {fee}
-              </Typography>
-            </Grid>
-            <Grid
-              container
-              justifyContent={"space-between"}
-              direction={"row"}
-              alignItems={"center"}
               height={24}
             >
-              <Tooltip
-                title={t("labelSwapToleranceTooltips").toString()}
-                placement={"top"}
+              <Typography
+                component={"p"}
+                variant="body2"
+                color={"textSecondary"}
               >
-                <Typography
-                  component={"p"}
-                  variant="body2"
-                  color={"textSecondary"}
-                  display={"inline-flex"}
-                  alignItems={"center"}
-                >
-                  <Info2Icon
-                    fontSize={"small"}
-                    color={"inherit"}
-                    sx={{ marginX: 1 / 2 }}
-                  />
-                  {" " + t("swapTolerance")}
-                </Typography>
-              </Tooltip>
-
+                {t("swapTolerance")}
+              </Typography>
               <Typography component={"p"} variant="body2">
                 {tradeCalcData ? (
                   <>
@@ -414,7 +356,7 @@ export const SwapTradeWrap = <
                           ? tradeData.slippage
                           : tradeCalcData.slippage
                           ? tradeCalcData.slippage
-                          : defalutSlipage}
+                          : 0.5}
                         %
                       </LinkActionStyle>
                       <PopoverPure
@@ -441,7 +383,7 @@ export const SwapTradeWrap = <
                               ? tradeData.slippage
                               : tradeCalcData.slippage
                               ? tradeCalcData.slippage
-                              : defalutSlipage,
+                              : 0.5,
                           }}
                         />
                       </PopoverPure>
@@ -459,25 +401,13 @@ export const SwapTradeWrap = <
               alignItems={"center"}
               marginTop={1 / 2}
             >
-              <Tooltip
-                title={t("labelSwapPriceImpactTooltips").toString()}
-                placement={"top"}
+              <Typography
+                component={"p"}
+                variant="body2"
+                color={"textSecondary"}
               >
-                <Typography
-                  component={"p"}
-                  variant="body2"
-                  color={"textSecondary"}
-                  display={"inline-flex"}
-                  alignItems={"center"}
-                >
-                  <Info2Icon
-                    fontSize={"small"}
-                    color={"inherit"}
-                    sx={{ marginX: 1 / 2 }}
-                  />
-                  {" " + t("swapPriceImpact")}
-                </Typography>
-              </Tooltip>
+                {t("swapPriceImpact")}
+              </Typography>
               <Typography
                 component={"p"}
                 color={priceImpactColor}
@@ -486,8 +416,6 @@ export const SwapTradeWrap = <
                 {priceImpact}
               </Typography>
             </Grid>
-            {/*,labelSwapMinReceiveTooltips,labelSwapFeeTooltips              */}
-
             <Grid
               container
               justifyContent={"space-between"}
@@ -495,27 +423,33 @@ export const SwapTradeWrap = <
               alignItems={"center"}
               marginTop={1 / 2}
             >
-              <Tooltip
-                title={t("labelSwapMinReceiveTooltips").toString()}
-                placement={"top"}
+              <Typography
+                component={"p"}
+                variant="body2"
+                color={"textSecondary"}
               >
-                <Typography
-                  component={"p"}
-                  variant="body2"
-                  color={"textSecondary"}
-                  display={"inline-flex"}
-                  alignItems={"center"}
-                >
-                  <Info2Icon
-                    fontSize={"small"}
-                    color={"inherit"}
-                    sx={{ marginX: 1 / 2 }}
-                  />
-                  {" " + t("swapMinReceive")}
-                </Typography>
-              </Tooltip>
+                {t("swapMinReceive")}
+              </Typography>
               <Typography component={"p"} variant="body2" color={"textPrimary"}>
                 {minimumReceived}
+              </Typography>
+            </Grid>
+            <Grid
+              container
+              justifyContent={"space-between"}
+              direction={"row"}
+              alignItems={"center"}
+              marginTop={1 / 2}
+            >
+              <Typography
+                component={"p"}
+                variant="body2"
+                color={"textSecondary"}
+              >
+                {t("swapFee")}
+              </Typography>
+              <Typography component={"p"} variant="body2" color={"textPrimary"}>
+                {fee}
               </Typography>
             </Grid>
           </Grid>

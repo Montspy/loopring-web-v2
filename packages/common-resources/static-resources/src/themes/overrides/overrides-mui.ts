@@ -919,7 +919,7 @@ export const MuiAlert = ({ colorBase }: any) => {
         // backgroundColor: colorBase.borderDark,
         // backgroundColor: 'var(--color-pop-bg)',
         backgroundColor: colorBase.popBg,
-        height: `auto`,
+        height: `${unit * 10}px`,
         ".MuiAlertTitle-root": {
           color: colorBase.textPrimary,
           fontSize: pxToRem(16),
@@ -972,10 +972,9 @@ export const MuiSnackbar = () => {
         top: `${unit * 10}px`,
         right: `${unit * 2}px`,
         width: "auto",
-        minHeight: `${unit * 10}px`,
+        height: `${unit * 10}px`,
         justifyContent: "flex-end",
         alignItems: "flex-start",
-        pointerEvents: "none" as any,
       },
     },
   };

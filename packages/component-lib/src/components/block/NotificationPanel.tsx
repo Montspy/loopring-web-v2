@@ -20,24 +20,21 @@ export const NotificationPanel = ({
   notification = {
     activities: [],
     notifications: [],
-    invest: [],
   },
 }: {
   notification: NOTIFICATION;
 }) => {
   // myLog("notifications", notification.notifications);
   const hasActivities =
-    notification.activities &&
-    notification.activities?.length &&
-    notification.activities.findIndex(({ startShow }) => {
-      myLog("NotificationPanel", Date.now() > startShow);
-      return Date.now() > startShow;
+    notification.activities.length &&
+    notification.activities.findIndex(({ startDate }) => {
+      myLog("NotificationPanel", Date.now() > startDate);
+      return Date.now() > startDate;
     }) !== -1;
   const hasNotifications =
-    notification.notifications &&
     notification.notifications.length &&
     notification.notifications.findIndex(
-      ({ startShow }) => Date.now() > startShow
+      ({ startDate }) => Date.now() > startDate
     ) !== -1;
   return (
     <BoxStyle
@@ -78,7 +75,7 @@ export const NotificationPanel = ({
               >
                 {notification.notifications.map((notify, index) => (
                   <NotificationListItem
-                    key={notify.name.toString() + index}
+                    key={notify.id.toString() + index}
                     {...notify}
                     account={notification.account}
                   />

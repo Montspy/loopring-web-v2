@@ -463,8 +463,6 @@ export function useAccountModalForUI({
       clearTimeout(nodeTimer.current as NodeJS.Timeout);
     };
   }, [account.accAddress, chainInfos?.depositHashes]);
-  const { setShowLayerSwapNotice } = useOpenModals();
-
   const addAssetList: AddAssetItem[] = React.useMemo(
     () => [
       {
@@ -502,12 +500,15 @@ export function useAccountModalForUI({
           });
         },
       },
-      {
-        ...AddAssetList.FromExchange,
-        handleSelect: () => {
-          setShowLayerSwapNotice({ isShow: true });
-        },
-      },
+      // {
+      //   ...AddAssetList.FromExchange,
+      //   handleSelect: () => {
+      //     window.open(
+      //       `https://www.layerswap.io/?destNetwork=loopring_mainnet&destAddress=${account.accAddress}`
+      //     );
+      //     window.opener = null;
+      //   },
+      // },
     ],
     [
       account.accAddress,
@@ -1029,6 +1030,7 @@ export function useAccountModalForUI({
           />
         ),
       },
+
       [AccountStep.NFTDeploy_WaitForAuth]: {
         view: (
           <NFTDeploy_WaitForAuth

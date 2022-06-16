@@ -23,9 +23,8 @@ import {
   useSettings,
   NFTMintAdvanceProps,
   MintAdvanceNFTWrap,
-  LayerswapNotice,
 } from "../..";
-import { Account, FeeInfo, IBData } from "@loopring-web/common-resources";
+import { FeeInfo, IBData } from "@loopring-web/common-resources";
 import { WithTranslation, withTranslation } from "react-i18next";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
@@ -113,13 +112,15 @@ export const ModalPanel = <T extends IBData<I>, I, F = FeeInfo>({
   transferProps,
   withdrawProps,
   depositProps,
+  // depositGroupProps,
   nftTransferProps,
   nftWithdrawProps,
+
+  // nftDepositProps,
   resetProps,
   nftMintAdvanceProps,
   activeAccountProps,
   assetsData,
-  account,
   ...rest
 }: {
   _width?: number | string;
@@ -137,7 +138,6 @@ export const ModalPanel = <T extends IBData<I>, I, F = FeeInfo>({
   activeAccountProps: ResetProps<F>;
   assetsData: any[];
   exportAccountProps: any;
-  account: Account;
   setExportAccountToastOpen: any;
 }) => {
   // const { t } = useTranslation();
@@ -165,7 +165,6 @@ export const ModalPanel = <T extends IBData<I>, I, F = FeeInfo>({
     isShowActiveAccount,
     isShowNFTMintAdvance,
     // isShowNFTMint,
-    isShowLayerSwapNotice,
   } = modals;
   const theme = useTheme();
   return (
@@ -286,26 +285,37 @@ export const ModalPanel = <T extends IBData<I>, I, F = FeeInfo>({
           />
         }
       />
-      <Modal
-        open={isShowExportAccount.isShow}
-        onClose={() =>
-          setShowExportAccount({ ...isShowExportAccount, isShow: false })
-        }
-        content={
-          <ExportAccountPanel
-            {...{
-              ...rest,
-              _width: `calc(var(--modal-width) - ${(theme.unit * 5) / 2}px)`,
-              _height: `calc(var(--modal-height) + ${theme.unit * 16}px)`,
-            }}
-          />
-        }
-      />
       <InformationForAccountFrozen
         open={isShowTradeIsFrozen.isShow}
         type={isShowTradeIsFrozen.type ?? "Action"}
       />
-      <LayerswapNotice open={isShowLayerSwapNotice.isShow} account={account} />
+      {/*<MuiModal*/}
+      {/*  open={isShowNFTDeposit.isShow}*/}
+      {/*  onClose={() => setShowNFTDeposit({ isShow: false })}*/}
+      {/*  aria-labelledby="modal-modal-title"*/}
+      {/*  aria-describedby="modal-modal-description"*/}
+      {/*>*/}
+      {/*  <SwitchPanelStyled*/}
+      {/*    position={"relative"}*/}
+      {/*    style={{ alignItems: "stretch" }}*/}
+      {/*  >*/}
+      {/*    <Box display={"flex"} width={"100%"} flexDirection={"column"}>*/}
+      {/*      <ModalCloseButton*/}
+      {/*        onClose={() => setShowNFTDeposit({ isShow: false })}*/}
+      {/*        t={t}*/}
+      {/*        {...rest}*/}
+      {/*      />*/}
+      {/*    </Box>*/}
+      {/*    <Box*/}
+      {/*      display={"flex"}*/}
+      {/*      flexDirection={"column"}*/}
+      {/*      flex={1}*/}
+      {/*      justifyContent={"stretch"}*/}
+      {/*    >*/}
+      {/*      <DepositNFTWrap {...nftDepositProps} />*/}
+      {/*    </Box>*/}
+      {/*  </SwitchPanelStyled>*/}
+      {/*</MuiModal>*/}
       <Modal
         open={isShowNFTMintAdvance.isShow}
         onClose={() => setShowNFTMintAdvance({ isShow: false })}

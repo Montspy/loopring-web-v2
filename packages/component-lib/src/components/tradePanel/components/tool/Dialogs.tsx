@@ -19,14 +19,7 @@ import React from "react";
 import { ConnectProviders } from "@loopring-web/web3-provider";
 import styled from "@emotion/styled";
 import { useOpenModals } from "../../../../stores";
-import {
-  Account,
-  Bridge,
-  CheckBoxIcon,
-  CheckedIcon,
-  copyToClipBoard,
-} from "@loopring-web/common-resources";
-import { useLocation } from "react-router-dom";
+import { CheckBoxIcon, CheckedIcon } from "@loopring-web/common-resources";
 
 const DialogStyle = styled(Dialog)`
   &.MuiDialog-root {
@@ -346,14 +339,10 @@ export const ConfirmLinkCopy = withTranslation("common", {
     t,
     open,
     handleClose,
-    setCopyToastOpen,
   }: WithTranslation & {
     open: boolean;
-    setCopyToastOpen: (vale: boolean) => void;
     handleClose: (event: MouseEvent, isAgree?: boolean) => void;
   }) => {
-    const { search } = useLocation();
-    const searchParams = new URLSearchParams(search);
     return (
       <DialogStyle
         open={open}
@@ -361,11 +350,7 @@ export const ConfirmLinkCopy = withTranslation("common", {
         onClose={(e: MouseEvent) => handleClose(e)}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>
-          <Typography variant={"h4"} textAlign={"center"}>
-            {t("labelOpenInWalletTitle")}
-          </Typography>
-        </DialogTitle>
+        <DialogTitle> {t("labelOpenInWalletTitle")}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             <Typography component={"span"} variant={"body1"} color={"inherit"}>
@@ -389,30 +374,15 @@ export const ConfirmLinkCopy = withTranslation("common", {
             </ListItem>
           </List>
         </DialogContent>
-
         <DialogActions>
           <Button
-            variant={"contained"}
-            fullWidth
-            onClick={(e) => {
-              copyToClipBoard(Bridge + `?${searchParams.toString()}`);
-              setCopyToastOpen(true);
-              handleClose(e as any);
-            }}
+            variant={"outlined"}
+            size={"medium"}
+            onClick={(e) => handleClose(e as any)}
           >
-            {t("labelCopyClipBoard")}
+            {t("labelOK")}
           </Button>
         </DialogActions>
-        <DialogContent>
-          <Typography component={"p"} marginY={2}>
-            Manually Selected & Copy:
-          </Typography>
-          <TextField
-            disabled={true}
-            fullWidth={true}
-            value={Bridge + `?${searchParams.toString()}`}
-          />
-        </DialogContent>
       </DialogStyle>
     );
   }
@@ -585,6 +555,7 @@ export const InformationForNoMetaNFT = withTranslation("common", {
     );
   }
 );
+
 export const InformationForAccountFrozen = withTranslation("common", {
   withRef: true,
 })(
@@ -632,87 +603,6 @@ export const InformationForAccountFrozen = withTranslation("common", {
     );
   }
 );
-
-export const LayerswapNotice = withTranslation("common", {
-  withRef: true,
-})(
-  ({
-    t,
-    open,
-    account,
-  }: WithTranslation & {
-    open: boolean;
-    account: Account;
-  }) => {
-    const [agree, setAgree] = React.useState(false);
-
-    React.useEffect(() => {
-      if (!open) {
-        setAgree(false);
-      }
-    }, [open]);
-    const { setShowLayerSwapNotice, setShowAccount } = useOpenModals();
-    return (
-      <DialogStyle
-        open={open}
-        onClose={() => setShowLayerSwapNotice({ isShow: false })}
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle> {t("labelInformation")}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            <Trans i18nKey={"labelLayerSwapUnderstandDes"}>
-              LayerSwap is a 3rd party App service provider to help move tokens
-              from exchange to Loopring L2 directly. If you have any concerns
-              regarding their service, please check out their
-              <Link
-                target="_blank"
-                rel="noopener noreferrer"
-                href={"https://www.layerswap.io/blog/guide/Terms_of_Service"}
-              >
-                TOS
-              </Link>
-              .
-            </Trans>
-          </DialogContentText>
-          <MuiFormControlLabel
-            control={
-              <Checkbox
-                checked={agree}
-                onChange={(_event: any, state: boolean) => {
-                  setAgree(state);
-                }}
-                checkedIcon={<CheckedIcon />}
-                icon={<CheckBoxIcon />}
-                color="default"
-              />
-            }
-            label={t("labelLayerSwapUnderstand")}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button
-            variant={"contained"}
-            size={"small"}
-            disabled={!agree}
-            onClick={() => {
-              window.open(
-                `https://www.layerswap.io/?destNetwork=loopring_mainnet&destAddress=${account.accAddress}&lockNetwork=true&lockAddress=true&addressSource=loopringWeb`
-              );
-              window.opener = null;
-              setShowAccount({ isShow: false });
-              setShowLayerSwapNotice({ isShow: false });
-            }}
-            color={"primary"}
-          >
-            {t("labelIUnderStand")}
-          </Button>
-        </DialogActions>
-      </DialogStyle>
-    );
-  }
-);
-
 export const OtherExchangeDialog = withTranslation("common", {
   withRef: true,
 })(

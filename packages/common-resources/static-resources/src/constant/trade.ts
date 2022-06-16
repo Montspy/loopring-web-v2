@@ -147,47 +147,47 @@ export type LOOPRING_NFT_METADATA = {
 export const NFTLimit = 12;
 
 export const AddAssetList = {
-  FromMyL1: {
-    key: "FromMyL1",
-    svgIcon: "IncomingIcon",
-    enableKey: "deposit",
-  },
   BuyWithCard: {
     key: "BuyWithCard",
     svgIcon: "CardIcon",
     enableKey: "legal",
   },
-  FromOtherL2: {
-    key: "FromOtherL2",
-    svgIcon: "L2l2Icon",
-    enableKey: null,
+  FromMyL1: {
+    key: "FromMyL1",
+    svgIcon: "IncomingIcon",
+    enableKey: "deposit",
   },
   FromOtherL1: {
     key: "FromOtherL1",
-    svgIcon: "OutputIcon",
+    svgIcon: "IncomingIcon",
+    enableKey: null,
+  },
+  FromOtherL2: {
+    key: "FromOtherL2",
+    svgIcon: "IncomingIcon",
     enableKey: null,
   },
   FromExchange: {
     key: "FromExchange",
-    svgIcon: "ExchangeAIcon",
+    svgIcon: "IncomingIcon",
     enableKey: null,
   },
 };
 
 export const SendAssetList = {
+  SendAssetToL2: {
+    key: "SendTOL2",
+    svgIcon: "IncomingIcon",
+    enableKey: "transfer",
+  },
   SendAssetToMyL1: {
     key: "SendToMyL1",
     svgIcon: "IncomingIcon",
     enableKey: "withdraw",
   },
-  SendAssetToL2: {
-    key: "SendTOL2",
-    svgIcon: "L2l2Icon",
-    enableKey: "transfer",
-  },
   SendAssetToOtherL1: {
     key: "SendToOtherL1",
-    svgIcon: "L1l2Icon",
+    svgIcon: "IncomingIcon",
     enableKey: "withdraw",
   },
 };
@@ -295,5 +295,3 @@ export const useAddressTypeLists = <
     exchangeList,
   };
 };
-
-export const defalutSlipage = 0.1;

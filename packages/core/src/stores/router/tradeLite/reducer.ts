@@ -1,14 +1,12 @@
 import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import { PageTradeLite, PageTradeLiteStatus } from "./interface";
 import * as sdk from "@loopring-web/loopring-sdk";
-import { MAPFEEBIPS } from "../../../defs";
 
 const initState = {
   market: undefined,
   tradePair: undefined,
   calcTradeParams: undefined,
   priceImpactObj: undefined,
-  maxFeeBips: MAPFEEBIPS,
 };
 
 const initialState: PageTradeLiteStatus = {
@@ -43,9 +41,6 @@ const pageTradeLiteSlice: Slice<PageTradeLiteStatus> = createSlice({
         sellMinAmtInfo,
         lastStepAt,
         close,
-        maxFeeBips,
-        feeTakerRate,
-        tradeCost,
       } = action.payload;
       if (market !== state.pageTradeLite.market) {
         state.pageTradeLite = {
@@ -76,15 +71,12 @@ const pageTradeLiteSlice: Slice<PageTradeLiteStatus> = createSlice({
           minOrderInfo,
           lastStepAt: undefined,
           close,
-          maxFeeBips: MAPFEEBIPS,
-          tradeCost: tradeCost,
-          feeTakerRate: feeTakerRate,
         };
       } else {
         if (lastStepAt) {
           state.pageTradeLite.lastStepAt = lastStepAt;
         }
-        if (tradePair && tradePair) {
+        if (tradePair) {
           state.pageTradeLite.tradePair = tradePair;
           state.pageTradeLite.lastStepAt = undefined;
         }
@@ -112,7 +104,6 @@ const pageTradeLiteSlice: Slice<PageTradeLiteStatus> = createSlice({
             ? sdk.TradeChannel.BLANK
             : sdk.TradeChannel.MIXED;
         }
-
         if (priceImpactObj) {
           state.pageTradeLite.priceImpactObj = priceImpactObj;
         }
@@ -134,11 +125,6 @@ const pageTradeLiteSlice: Slice<PageTradeLiteStatus> = createSlice({
         if (minOrderInfo) {
           state.pageTradeLite.minOrderInfo = minOrderInfo;
         }
-        if (maxFeeBips) {
-          state.pageTradeLite.maxFeeBips = maxFeeBips;
-        }
-        state.pageTradeLite.tradeCost = tradeCost;
-        state.pageTradeLite.feeTakerRate = feeTakerRate;
       }
     },
   },

@@ -78,10 +78,6 @@ import {
   Info2Icon,
   IncomingIcon,
   CardIcon,
-  L1l2Icon,
-  L2l2Icon,
-  ExchangeAIcon,
-  OutputIcon,
 } from "@loopring-web/common-resources";
 
 const Styled = styled.div`
@@ -169,11 +165,7 @@ const listIcon = [
   <DeleteIcon />,
   <Info2Icon />,
   <IncomingIcon />,
-  <OutputIcon />,
   <CardIcon />,
-  <L1l2Icon />,
-  <L2l2Icon />,
-  <ExchangeAIcon />,
 ];
 
 export const IconList: Story<any> = withTranslation()(

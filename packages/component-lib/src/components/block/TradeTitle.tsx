@@ -62,6 +62,7 @@ export const TradeTitle = <I extends object>({
 }) => {
   const { coinJson } = useSettings();
   const history = useHistory();
+
   const sellCoinIcon: any = coinJson[coinAInfo?.simpleName];
   const buyCoinIcon: any = coinJson[coinBInfo?.simpleName];
 
@@ -224,11 +225,11 @@ export const TradeTitle = <I extends object>({
                         const month = (
                           "0" + (date.getMonth() + 1).toString()
                         ).slice(-2);
-                        // const day = ("0" + date.getDate().toString()).slice(-2);
-                        const current_event_date = `${year}-${month}`;
+                        const day = ("0" + date.getDate().toString()).slice(-2);
+                        const current_event_date = `${year}-${month}-${day}`;
 
                         history.push(
-                          `/race-event/${current_event_date}?selected=${pair}&type=${ruleType}&owner=${account?.accAddress}`
+                          `/race-event/${current_event_date}?pair=${pair}&type=${ruleType}&owner=${account?.accAddress}`
                         );
                       }}
                     >
@@ -249,11 +250,11 @@ export const TradeTitle = <I extends object>({
                       const month = (
                         "0" + (date.getMonth() + 1).toString()
                       ).slice(-2);
-                      // const day = ("0" + date.getDate().toString()).slice(-2);
-                      const current_event_date = `${year}-${month}`;
+                      const day = ("0" + date.getDate().toString()).slice(-2);
+                      const current_event_date = `${year}-${month}-${day}`;
 
                       history.push(
-                        `/race-event/${current_event_date}?selected=${pair}&type=${
+                        `/race-event/${current_event_date}?pair=${pair}&type=${
                           activityInProgressRules[`AMM-${pair}`].ruleType[0]
                         }&owner=${account?.accAddress}`
                       );

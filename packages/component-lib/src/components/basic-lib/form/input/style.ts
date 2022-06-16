@@ -40,11 +40,9 @@ export const IWrap = styled(Box)<
         color: var(--color-primary);
       }
     }
+
     .no-balance {
       text-decoration: none;
-    }
-    .disabled {
-      color: var(--color-text-disable);
     }
   }
 

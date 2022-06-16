@@ -2,7 +2,6 @@ import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import { PageTradePro, PageTradeProStatus } from "./interface";
 import { TradeProType } from "@loopring-web/component-lib";
 import { RequireOne } from "@loopring-web/common-resources";
-import { MAPFEEBIPS } from "../../../defs";
 
 const initState = {
   market: "" as any,
@@ -61,9 +60,6 @@ const pageTradeProSlice: Slice<PageTradeProStatus<{ [key: string]: any }>> =
           buyUserOrderInfo,
           minOrderInfo,
           lastStepAt,
-          maxFeeBips,
-          feeTakerRate,
-          tradeCost,
         } = action.payload;
         if (market !== state.pageTradePro.market) {
           state.pageTradePro = {
@@ -91,9 +87,6 @@ const pageTradeProSlice: Slice<PageTradeProStatus<{ [key: string]: any }>> =
             buyUserOrderInfo,
             minOrderInfo,
             lastStepAt: undefined,
-            maxFeeBips: MAPFEEBIPS,
-            tradeCost: tradeCost,
-            feeTakerRate: feeTakerRate,
           };
         } else {
           if (tradeType) {
@@ -168,11 +161,6 @@ const pageTradeProSlice: Slice<PageTradeProStatus<{ [key: string]: any }>> =
           if (minOrderInfo !== undefined) {
             state.pageTradePro.minOrderInfo = minOrderInfo;
           }
-          if (maxFeeBips) {
-            state.pageTradePro.maxFeeBips = maxFeeBips;
-          }
-          state.pageTradePro.tradeCost = tradeCost;
-          state.pageTradePro.feeTakerRate = feeTakerRate;
         }
       },
     },

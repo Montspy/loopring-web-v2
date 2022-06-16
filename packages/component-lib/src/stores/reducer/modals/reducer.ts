@@ -17,7 +17,6 @@ const initialState: ModalState = {
   isShowAmm: { isShow: false },
   isShowConnect: { isShow: false, step: 0 },
   isShowAccount: { isShow: false, step: 0 },
-  isShowLayerSwapNotice: { isShow: false },
   isShowFeeSetting: { isShow: false },
   isShowTradeIsFrozen: { isShow: false, type: "" },
   isShowIFrame: { isShow: false, url: "" },
@@ -222,12 +221,6 @@ export const modalsSlice: Slice<ModalState> = createSlice({
         isShow,
       };
     },
-    setShowLayerSwapNotice(state, action: PayloadAction<{ isShow: boolean }>) {
-      const { isShow } = action.payload;
-      state.isShowLayerSwapNotice = {
-        isShow,
-      };
-    },
     setShowTradeIsFrozen(
       state,
       action: PayloadAction<{ isShow: boolean; type: string }>
@@ -262,5 +255,4 @@ export const {
   setShowSupport,
   setShowWrongNetworkGuide,
   setShowOtherExchange,
-  setShowLayerSwapNotice,
 } = modalsSlice.actions;

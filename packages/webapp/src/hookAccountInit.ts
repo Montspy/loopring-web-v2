@@ -104,7 +104,7 @@ export function useAccountInit({ state }: { state: keyof typeof SagaStatus }) {
   React.useEffect(() => {
     switch (userRewardsStatus) {
       case SagaStatus.ERROR:
-        console.log("Network ERROR::", "ammpoolAPI getAmmPoolUserRewards");
+        console.log("ERROR", "get userRewards");
         userRewardsUnset();
         break;
       case SagaStatus.DONE:

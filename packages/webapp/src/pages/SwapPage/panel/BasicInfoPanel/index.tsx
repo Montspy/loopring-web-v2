@@ -90,7 +90,7 @@ const BasicInfoPanel = ({
             alignItems={"center"}
           >
             <TradeTitle
-              account={account}
+              accoun={account}
               {...{
                 baseShow,
                 quoteShow,

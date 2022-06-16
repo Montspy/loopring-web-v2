@@ -33,7 +33,6 @@ export interface ModalState {
   isShowResetAccount: ModalStatePlayLoad;
   isShowActiveAccount: ModalStatePlayLoad;
   isShowExportAccount: ModalStatePlayLoad;
-  isShowLayerSwapNotice: ModalStatePlayLoad;
   isShowSwap: ModalStatePlayLoad;
   isShowAmm: ModalStatePlayLoad;
   isShowTradeIsFrozen: ModalStatePlayLoad & { type?: string };
